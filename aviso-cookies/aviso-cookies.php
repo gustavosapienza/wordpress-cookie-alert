@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Aviso Cookie
-Plugin URI: http://www.gustavosapienza.com.br
+Plugin URI: https://wordpress.org/plugins/aviso-cookie
 Description: Texto de aviso de cookies
 Version: 1.1
 Author: Gustavo Sapienza
@@ -42,11 +42,11 @@ function display_texto_cookie_element()
 {
   ?>
       <h2>Texto Cookie</h2>
-      <textarea name="texto_cookie" id="texto_cookie" style="width:100%; height: 200px"><?php echo get_option('texto_cookie'); ?></textarea>
+      <textarea name="texto_cookie" id="texto_cookie" style="width:100%; height: 200px" placeholder="Meu texto de cookie"><?php echo get_option('texto_cookie'); ?></textarea>
       <h3>Hexadecimal retícula</h3>
-      <input name="hexa_cor" id="hexa_cor" style="border:0;" value="<?php echo get_option('hexa_cor'); ?>">
+      <input name="hexa_cor" id="hexa_cor" style="border:0;" value="<?php echo get_option('hexa_cor'); ?>" placeholder="#000000">
       <h3>Opacidade</h3>
-      <input name="opacidade" id="opacidade" style="border:0;" value="<?php echo get_option('opacidade'); ?>">
+      <input name="opacidade" id="opacidade" style="border:0;" value="<?php echo get_option('opacidade'); ?>" placeholder="0.9">
     <?php
 }
 
@@ -78,33 +78,40 @@ function aviso_cookies() {
 <script>
 jQuery(document).ready(function($){
     if(localStorage.getItem("aceito") != "aceito"){
-      $(".cookie_container").show()
+      $(".cookie_container").fadeIn()
     }
     $(document).on("click",".aceito",function(){
-      $(".cookie_container").remove()
+      $(".cookie_container").fadeOut()
       localStorage.setItem("aceito","aceito");
     });
 });
 </script>
 
 <style>
-  .cookie_container {
+
+  
+.cookie_container {
     width: 100%;
-    height: 100%;
     z-index: 10000;
     background-color: <?php echo get_option('hexa_cor'); ?>;
     position: fixed;
+    bottom: 0;
     opacity: <?php echo get_option('opacidade'); ?>;
 }
 
 .cookie_flutuante {
     color: #fff;
     bottom: 0;
-    font-size: 20px;
-    width: 50%;
+    font-size: 16px;
+    width: 90%;
     margin-bottom: 10px;
     line-height: 31px;
-    margin: 20px auto;
+    text-align: center;
+    margin: 50px auto;
+}
+  
+.cookie_flutuante button {
+  cursor: pointer;
 }
 </style>
 
